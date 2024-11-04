@@ -55,7 +55,7 @@ export default function Page() {
   }
 
   return (
-    <div>
+    <div className="p-2">
       <Textarea placeholder="输入待加密/解密文本" rows={5} value={text} onChange={(e) => setText(e.target.value)}>
       </Textarea>
 
