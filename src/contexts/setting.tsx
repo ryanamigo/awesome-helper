@@ -76,3 +76,10 @@ export function useSetting() {
   const {setting, save} =  React.useContext(SettingContext)
   return [setting, save] as [typeof setting, typeof save]
 }
+
+export function useSettingOptions() {
+  const {setting} = React.useContext(SettingContext)
+  return [setting]
+}
+
+export default SettingProvider

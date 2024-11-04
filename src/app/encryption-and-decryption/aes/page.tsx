@@ -1,7 +1,7 @@
 'use client'
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useSetting } from "@/contexts/setting";
+import { useSettingOptions } from "@/contexts/setting";
 import { useToast } from "@/hooks/use-toast";
 import { decrypt, encrypt } from "@/lib/n-crypto";
 import { isJson, unescape } from "@/lib/utils";
@@ -10,7 +10,7 @@ import JsonView from '@uiw/react-json-view'
 import { useClipboard } from "@/hooks/use-clipboard";
 
 export default function Page() {
-  const [setting] = useSetting();
+  const [setting] = useSettingOptions();
   // 待处理的文本
   const [text, setText] = useState('');
   // 加解密后的文本

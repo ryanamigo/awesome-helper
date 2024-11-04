@@ -1,8 +1,7 @@
 'use client'
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { useSetting } from "@/contexts/setting";
+import { useSettingOptions } from "@/contexts/setting";
 import { generateIDCard } from "@/lib/cnid-generator";
 import { useState } from "react";
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable} from '@tanstack/react-table'
@@ -17,7 +16,7 @@ type CnidInfo = {
 
 
 export default function Page() {
-  const [setting] = useSetting();
+  const [setting] = useSettingOptions();
   const [results, setResults] = useState<Array<CnidInfo>>([]);
   const { copy } = useClipboard()
   const columns: ColumnDef<CnidInfo>[] = [

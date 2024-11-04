@@ -1,7 +1,10 @@
 'use client'
 import { PropsWithChildren, useState } from "react";
-import Setting from "@/components/setting";
-import { SettingProvider } from "@/contexts/setting";
+import dynamic from 'next/dynamic'
+
+const SettingProvider = dynamic(() => import('@/contexts/setting'), { ssr: false })
+const Setting = dynamic(() => import('@/components/setting'), { ssr: false })
+
 const Main: React.FC<PropsWithChildren> = ({children}) => {
   const [isOpen, setIsOpen] = useState(false);
 
