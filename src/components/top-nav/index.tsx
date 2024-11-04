@@ -27,11 +27,11 @@ const navList = [
   },
   {
     name: '号码模拟',
-    href: '/num-gen/cn-id',
+    href: '/num-gen/cnid',
     children: [
       {
         name: '中国身份证',
-        href: '/num-gen/cn-id'
+        href: '/num-gen/cnid'
       },
     ]
   }
