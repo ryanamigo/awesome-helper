@@ -1,6 +1,4 @@
-import { redirect } from "next/navigation"
+'use client'
+import Home from './encryption-and-decryption/aes/page'
 
-export default function Page() {
-  redirect('/encryption-and-decryption/aes')
-  return <div></div>
-}
+export default Home;

@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 import CnidSetting from './cnid-setting';
 
 const SettingComponentsMap: Record<string, React.FC> = {
+  '/': AesSetting,
   '/encryption-and-decryption/aes': AesSetting,
   '/num-gen/cnid': CnidSetting
 }
