@@ -40,13 +40,18 @@ export default function Page() {
     if (!text || !setting) return;
     const aesKey = setting.aesKey
     const aesIv = setting?.aesIv
+    const autoUnescape = setting?.autoUnescape
     if (!aesKey || !aesIv) return;
     try {
       const decrypedText = decrypt(aesKey, aesIv, text) || '';
-      const unescapedText = unescape(decrypedText);
-      setResult(unescapedText);
+      if (autoUnescape) {
+        const unescapedText = unescape(decrypedText);
+        setResult(unescapedText);
+      } else {
+        setResult(decrypedText);
+      }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
-      console.log(err);
       toast({
         variant: 'destructive',
         description: '解密失败，请检查密钥或密文是否正确'

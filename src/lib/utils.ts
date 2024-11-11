@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -25,5 +26,16 @@ export function isJson(str: string){
 
 // 去转义符
 export function unescape(str: string) {
-  return str.replace(/\\n/g, '\n').replace(/\\r/g, '\r').replace(/\\t/g, '\t').replace(/\\b/g, '\b').replace(/\\f/g, '\f').replace(/\\"/g, '"').replace(/\\'/g, "'").replace(/\\\\/g, '\\');
+  try {
+    return JSON.parse(`"${str}"`);
+  } catch (err) {
+    return str.replace(/\\n/g, '\n')
+              .replace(/\\r/g, '\r')
+              .replace(/\\t/g, '\t')
+              .replace(/\\b/g, '\b')
+              .replace(/\\f/g, '\f')
+              .replace(/\\"/g, '\"')
+              .replace(/\\'/g, "'")
+              .replace(/\\\\/g, '\\');
+  }
 }

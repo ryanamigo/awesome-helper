@@ -25,6 +25,7 @@ const AesSetting: React.FC = () => {
       aesKey: localSetting?.aesKey || '',
       aesIv: localSetting?.aesIv || '',
       formatJson: localSetting?.formatJson || false,
+      autoUnescape: localSetting?.autoUnescape || false,
     }
   });
 
@@ -122,6 +123,20 @@ const AesSetting: React.FC = () => {
                 <Checkbox checked={field.value} onCheckedChange={field.onChange}/>
               </FormControl>
               <FormLabel>自动格式化json</FormLabel>
+              <FormMessage />
+            </FormItem>
+          )}
+        >
+        </FormField>
+        <FormField
+          control={form.control}
+          name="autoUnescape"
+          render={( { field }) => (
+            <FormItem>
+              <FormControl>
+                <Checkbox checked={field.value} onCheckedChange={field.onChange}/>
+              </FormControl>
+              <FormLabel>自动去转义</FormLabel>
               <FormMessage />
             </FormItem>
           )}

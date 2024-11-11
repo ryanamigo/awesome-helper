@@ -9,6 +9,7 @@ type AesSettingOptions = {
   aesKey: string;
   aesIv: string;
   formatJson: boolean;
+  autoUnescape: boolean;
 }
 
 type CnIdOptions = {
@@ -32,6 +33,7 @@ const defaultValue: SettingOptions =  {
   aesKey: '1234567890000000',
   aesIv: '1234567890000000',
   formatJson: true,
+  autoUnescape: true,
   cnidGenCount: 5,
 }
 
