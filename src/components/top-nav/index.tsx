@@ -33,6 +33,14 @@ const navList = [
         name: '中国身份证',
         href: '/num-gen/cnid'
       },
+      {
+        name: '组织机构代码',
+        href: '/num-gen/org-code'
+      },
+      {
+        name: '统一社会信用代码',
+        href: '/num-gen/credit-code'
+      },
     ]
   }
 ]

@@ -13,7 +13,7 @@ const Main: React.FC<PropsWithChildren> = ({children}) => {
   }
   return (
     <SettingProvider>
-      <main className="container mx-auto px-4 flex gap-x-4 relative">
+      <main className="container mx-auto px-4 mt-4 flex gap-x-4 relative">
         <div className={`relative transition-all overflow-x-hidden w-full`}>
           {children}
         </div>

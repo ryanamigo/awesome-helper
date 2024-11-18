@@ -13,6 +13,8 @@ const SettingComponentsMap: Record<string, React.FC> = {
   '/num-gen/cnid': CnidSetting
 }
 
+const EmptySettingComponent = () => <></>;
+
 const Setting: React.FC<{ isOpen: boolean, onToggle: (v: boolean) => void }> = ({ isOpen, onToggle}) => {
   const handlePressedChange = (value: boolean) => {
     onToggle(value)
@@ -20,7 +22,10 @@ const Setting: React.FC<{ isOpen: boolean, onToggle: (v: boolean) => void }> = (
   const pathname = usePathname();
 
   const SettingComponents = useMemo(() => {
-    return SettingComponentsMap[pathname]
+    if (SettingComponentsMap[pathname]) {
+      return SettingComponentsMap[pathname]
+    }
+    return EmptySettingComponent
   }, [pathname])
   return (
     <div>
