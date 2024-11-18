@@ -42,6 +42,16 @@ const navList = [
         href: '/num-gen/credit-code'
       },
     ]
+  },
+  {
+    name: '网络',
+    href: '/network/ip',
+    children: [
+      {
+        name: 'IP地址',
+        href: '/network/ip'
+      }
+    ]
   }
 ]
 const TopNav: React.FC = () => {
