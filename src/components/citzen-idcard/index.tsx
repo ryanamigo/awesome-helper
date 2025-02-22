@@ -23,6 +23,9 @@ const drawImage = (ctx: CanvasRenderingContext2D, imageUrl: string, x: number, y
       ctx.drawImage(img, x, y, w, h); // 目标尺寸
       resolve(true);
     }
+    img.onerror = () => {
+      reject(new Error('图片加载失败'));
+    }
   })
 }
 
@@ -75,7 +78,7 @@ const CitizenIdCard: React.FC<CitizenIdCardProps> = ({ cnid, gender, regionName,
     await drawImage(ctx, '/empty-card-1.png', 0, 0, 350, 220);
     await drawImage(ctx, '/avatars/panda.png', 230, 30, 98, 137);
     drawBackText(ctx);
-  }, [])
+  }, [cnid, gender, regionName, birthday])
   useEffect(() => {
     const canvas = canvasRef.current;
     if (canvas) {
