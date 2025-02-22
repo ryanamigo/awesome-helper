@@ -14,6 +14,7 @@ type AesSettingOptions = {
 
 type CnIdOptions = {
   cnidGenCount: number;
+  cnidGenResultType: 'image' | 'text';
 }
 
 export type SettingOptions = AesSettingOptions & CnIdOptions
@@ -35,6 +36,7 @@ const defaultValue: SettingOptions =  {
   formatJson: true,
   autoUnescape: true,
   cnidGenCount: 5,
+  cnidGenResultType: 'image',
 }
 
 const SettingContext = React.createContext<{

@@ -2,6 +2,7 @@
 
 import { AnimatedBackground } from '@/components/animated-background'
 import "./globals.css";
+import "./fonts.css";
 import { Toaster } from '@/components/ui/toaster'
 import { AnimatePresence, motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
