@@ -65,6 +65,20 @@ type CitizenIdCardProps = {
 const CitizenIdCard: React.FC<CitizenIdCardProps> = ({ cnid, gender, regionName, birthday, onClick }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [loading, setLoading] = useState(true);
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  useEffect(() => {
+    const loadFont = async () => {
+      try {
+        await document.fonts.load('12px OCR-B');
+        setFontLoaded(true);
+      } catch (error) {
+        console.error('Font loading failed:', error);
+        setFontLoaded(true);
+      }
+    };
+    loadFont();
+  }, []);
 
   const drawBackText = useCallback((ctx: CanvasRenderingContext2D) => {
     ctx.textRendering = 'optimizeLegibility';
@@ -87,33 +101,42 @@ const CitizenIdCard: React.FC<CitizenIdCardProps> = ({ cnid, gender, regionName,
     lines.forEach((line, index) => {
       ctx.fillText(line, 65, 125 + index * 15);
     });
-    ctx.font = '12px OCR-B'
-    ctx.fillText(cnid, 100, 194)
-  }, [])
+    if (fontLoaded) {
+      ctx.font = '14px OCR-B';
+      ctx.fillText(cnid, 100, 194);
+    }
+  }, [cnid, gender, regionName, birthday, fontLoaded])
 
   const drawBack = useCallback(async (ctx: CanvasRenderingContext2D) => {
     setLoading(true);
-    await drawImage(ctx, '/empty-card-1.png', 0, 0, 350, 220);
-    await drawImage(ctx, '/avatars/panda.png', 230, 30, 98, 137);
-    drawBackText(ctx);
-    setLoading(false);
-  }, [cnid, gender, regionName, birthday])
+    try {
+      await drawImage(ctx, '/empty-card-1.png', 0, 0, 350, 220);
+      await drawImage(ctx, '/avatars/panda.png', 230, 30, 98, 137);
+      drawBackText(ctx);
+    } finally {
+      setLoading(false);
+    }
+  }, [cnid, gender, regionName, birthday, fontLoaded])
+
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (canvas) {
-      createHDCanvas(canvas, 350, 220);
-      const ctx = canvas.getContext('2d');
+    if (canvas && fontLoaded) {
+      const ctx = createHDCanvas(canvas, 350, 220);
       if (ctx) {
-        setTimeout(() => {
-          drawBack(ctx);
-        }, 1000)
+        drawBack(ctx);
       }
     }
-  }, [canvasRef])
+  }, [canvasRef, fontLoaded])
+
   return (
     <div onClick={onClick}>
-      {loading && <div className="loading">Loading...</div>}
-      <canvas ref={canvasRef} width={350} height={220} />
+      {(loading || !fontLoaded) && <div className="loading">Loading...</div>}
+      <canvas 
+        ref={canvasRef} 
+        width={350} 
+        height={220} 
+        style={{ visibility: fontLoaded ? 'visible' : 'hidden' }} 
+      />
     </div>
   )
 };
